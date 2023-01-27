@@ -1,7 +1,7 @@
 import React from "react";
 import { GrClose } from "react-icons/gr";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
-const Cart = ({ id, img, title, price, amount }) => {
+const Cart = ({ id, img, title, price, amount, removeItem }) => {
   return (
     <article className="cart-item">
       <div className="img-cart">
@@ -21,7 +21,7 @@ const Cart = ({ id, img, title, price, amount }) => {
               <FiChevronDown />
             </button>
           </div>
-          <button className="remove-btn">
+          <button className="remove-btn" onClick={() => removeItem(id)}>
             <GrClose />
           </button>
         </div>

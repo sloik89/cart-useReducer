@@ -2,8 +2,15 @@ import React from "react";
 import CartItem from "./Cart";
 import { useGlobalContext } from "./context";
 const CartContainer = () => {
-  const { cart } = useGlobalContext();
+  const { cart, total, loading, clearCart, removeItem } = useGlobalContext();
   console.log(cart);
+  if (cart.length === 0) {
+    return (
+      <section className="cart-container">
+        <h1>Your bag is empty</h1>
+      </section>
+    );
+  }
   return (
     <section className="cart-container">
       <header>
@@ -11,15 +18,17 @@ const CartContainer = () => {
       </header>
       <div>
         {cart.map((item) => {
-          return <CartItem key={item.id} {...item} />;
+          return <CartItem key={item.id} {...item} removeItem={removeItem} />;
         })}
       </div>
       <footer>
         <hr />
         <div className="cart-total">
-          total <span>$0.00</span>
+          total <span>${total}</span>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button className="btn clear-btn" onClick={clearCart}>
+          clear cart
+        </button>
       </footer>
     </section>
   );
